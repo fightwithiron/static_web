@@ -2,6 +2,13 @@ import { Link } from 'react-router-dom'
 
 const toys = [
   {
+    path: '/codec',
+    name: '编解码工作台',
+    desc: 'Base64、哈希、AES、SM4、与佛论禅……55 种方案随你折腾',
+    icon: '⌨️',
+    color: '#667eea'
+  },
+  {
     path: '/qq-avatar',
     name: 'QQ头像获取',
     desc: '输入QQ号获取高清头像',
