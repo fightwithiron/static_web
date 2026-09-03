@@ -1,0 +1,399 @@
+/* ============================================================
+   小游戏街机 · 共享样式（入口页 + 游戏页公共骨架）
+   延续站点暗色底与细边框语言，游戏感来自每张卡的专属强调色
+   与动态预览，而不是大面积渐变。
+   ============================================================ */
+
+.gm-wrap {
+  --gm-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --gm-panel: rgba(255, 255, 255, 0.028);
+  --gm-well: rgba(0, 0, 0, 0.32);
+  --gm-hairline: rgba(255, 255, 255, 0.09);
+
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 44px 24px 72px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- 头部 ---------- */
+
+.gm-header {
+  margin-bottom: 26px;
+}
+
+.gm-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.gm-kicker {
+  font-family: var(--gm-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  color: rgba(160, 160, 180, 0.75);
+  margin-bottom: 10px;
+}
+
+.gm-title {
+  font-size: 1.72rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  margin-bottom: 8px;
+}
+
+.gm-title-sm {
+  font-size: 1.42rem;
+  margin-bottom: 0;
+}
+
+.gm-sub {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.75;
+}
+
+/* ---------- 面板 / 分段 / 按钮 ---------- */
+
+.gm-panel {
+  background: var(--gm-panel);
+  border: 1px solid var(--gm-hairline);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.gm-seg {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--gm-hairline);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.gm-seg-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  transition: all 0.18s ease;
+}
+
+.gm-seg-btn small {
+  font-family: var(--gm-mono);
+  font-size: 9.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.gm-seg-btn:hover {
+  color: var(--text-primary);
+}
+
+.gm-seg-btn.active {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--text-primary);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.gm-btn-start {
+  padding: 8px 20px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.25);
+}
+
+.gm-btn-start:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.gm-btn-start:active {
+  transform: translateY(0);
+}
+
+.gm-back {
+  display: inline-flex;
+  margin-top: 30px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.gm-back:hover {
+  color: #aab2ff;
+  transform: translateX(-3px);
+}
+
+.gm-back-top {
+  margin-top: 0;
+}
+
+/* ---------- 入口页卡片 ---------- */
+
+.gm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.gm-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--gm-panel);
+  border: 1px solid var(--gm-hairline);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.gm-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--gm-accent) 55%, transparent);
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--gm-accent) 22%, rgba(0, 0, 0, 0.4));
+}
+
+.gm-card.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.gm-card.disabled:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--gm-hairline);
+}
+
+.gm-card-art {
+  height: 148px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(120% 130% at 50% 0%, color-mix(in srgb, var(--gm-accent) 14%, transparent) 0%, transparent 62%),
+    rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--gm-hairline);
+  overflow: hidden;
+}
+
+.gm-card-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.gm-card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gm-card-name {
+  font-size: 1.18rem;
+  font-weight: 700;
+}
+
+.gm-card:hover .gm-card-name {
+  color: var(--gm-accent);
+}
+
+.gm-card-tag {
+  font-family: var(--gm-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  border: 1px solid var(--gm-hairline);
+  border-radius: 999px;
+  padding: 2.5px 10px;
+  white-space: nowrap;
+}
+
+.gm-card-en {
+  font-family: var(--gm-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: color-mix(in srgb, var(--gm-accent) 70%, transparent);
+}
+
+.gm-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.gm-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gm-card-best {
+  font-family: var(--gm-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.gm-card-enter {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gm-accent);
+  transition: transform 0.2s ease;
+}
+
+.gm-card:hover .gm-card-enter {
+  transform: translateX(4px);
+}
+
+/* ---------- 卡片预览：扫雷小棋盘 ---------- */
+
+.gm-ms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 34px);
+  gap: 4px;
+  transform: rotate(-4deg);
+}
+
+.gm-ms-cell {
+  width: 34px;
+  height: 34px;
+  border-radius: 5px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--gm-mono);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.gm-ms-cell.is-num {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  color: #34d399;
+}
+
+.gm-ms-cell.is-flag {
+  animation: gm-flag-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes gm-flag-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.14); }
+}
+
+/* ---------- 卡片预览：贪吃蛇巡游 ---------- */
+
+.gm-snake-track {
+  position: relative;
+  width: 190px;
+  height: 92px;
+}
+
+.gm-snake-dot {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #34d399;
+  offset-path: path('M 12 46 H 150 Q 178 46 178 24 Q 178 8 150 8 H 40 Q 12 8 12 26 Q 12 46 40 46');
+  offset-rotate: 0deg;
+  animation: gm-snake-run 3.4s linear infinite;
+}
+
+.gm-snake-dot.d2 { background: #2eb986; animation-delay: -0.09s; opacity: 0.95; }
+.gm-snake-dot.d3 { background: #27966f; animation-delay: -0.18s; opacity: 0.8; }
+.gm-snake-dot.d4 { background: #1d7357; animation-delay: -0.27s; opacity: 0.62; }
+
+@keyframes gm-snake-run {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+.gm-snake-food {
+  position: absolute;
+  right: 6px;
+  top: 34px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #f87171;
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.7);
+  animation: gm-food-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes gm-food-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* ---------- 卡片预览：敬请期待 ---------- */
+
+.gm-art-more span {
+  font-family: var(--gm-mono);
+  font-size: 40px;
+  color: var(--text-muted);
+  animation: gm-more-blink 2.4s ease-in-out infinite;
+}
+
+@keyframes gm-more-blink {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 720px) {
+  .gm-wrap {
+    padding: 30px 16px 56px;
+  }
+
+  .gm-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gm-title {
+    font-size: 1.4rem;
+  }
+
+  .gm-seg {
+    width: 100%;
+  }
+
+  .gm-seg-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@supports not (offset-path: path('M 0 0')) {
+  .gm-snake-dot {
+    animation: gm-snake-fallback 3.4s ease-in-out infinite;
+  }
+
+  @keyframes gm-snake-fallback {
+    0%, 100% { transform: translate(12px, 40px); }
+    50% { transform: translate(150px, 14px); }
+  }
+}

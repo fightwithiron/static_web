@@ -2,6 +2,13 @@ import { Link } from 'react-router-dom'
 
 const toys = [
   {
+    path: '/games',
+    name: '小游戏街机',
+    desc: '扫雷、贪吃蛇，两台经典机器随时开局',
+    icon: '🎮',
+    color: '#34d399'
+  },
+  {
     path: '/codec',
     name: '编解码工作台',
     desc: 'Base64、哈希、AES、SM4、与佛论禅……55 种方案随你折腾',
