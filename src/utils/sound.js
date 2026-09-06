@@ -92,6 +92,139 @@ export const sfx = {
   ui() {
     tone({ freq: 640, dur: 0.05, type: 'triangle', vol: 0.07 })
   },
+
+  // —— 新街机音效 ——
+
+  // 五子棋落子：清脆的石子声
+  stone() {
+    tone({ freq: 720 + Math.random() * 160, end: 240, dur: 0.06, type: 'sine', vol: 0.3 })
+    noise({ dur: 0.03, vol: 0.14, lowpass: 3600 })
+  },
+
+  // 电子木鱼：木质"笃"声（正弦速降 + 短促敲击瞬态）
+  muyu(pitch = 0) {
+    const k = 1 + pitch * 0.06
+    tone({ freq: 950 * k, end: 320 * k, dur: 0.11, type: 'sine', vol: 0.34 })
+    noise({ dur: 0.05, vol: 0.16, lowpass: 2600 })
+  },
+
+  // 捏泡泡：随机音高的"啵"声
+  pop() {
+    const f = 420 + Math.random() * 380
+    tone({ freq: f * 1.7, end: f * 0.5, dur: 0.07, type: 'triangle', vol: 0.22 })
+    noise({ dur: 0.04, vol: 0.1, lowpass: 3200 })
+  },
+
+  // 烟花升空：气流哨声
+  whoosh() {
+    const ac = audioCtx()
+    if (!ac) return
+    noise({ dur: 0.5, vol: 0.1, lowpass: 1800 })
+    tone({ freq: 300, end: 900, dur: 0.45, type: 'sine', vol: 0.05 })
+  },
+
+  // 烟花炸裂：低频轰鸣 + 高频噼啪
+  burstBoom() {
+    noise({ dur: 0.45, vol: 0.34, lowpass: 1400 })
+    for (let i = 0; i < 5; i++) {
+      tone({
+        freq: 1400 + Math.random() * 2200,
+        dur: 0.04,
+        type: 'square',
+        vol: 0.05,
+        delay: 0.08 + Math.random() * 0.5,
+      })
+    }
+  },
+
+  // 许愿成功：风铃
+  chime() {
+    ;[1318.5, 1568, 2093].forEach((f, i) =>
+      tone({ freq: f, dur: 0.5, type: 'sine', vol: 0.1, delay: i * 0.1 })
+    )
+  },
+
+  // 大转盘：格子咔哒声
+  spinTick() {
+    tone({ freq: 1800, end: 1200, dur: 0.03, type: 'square', vol: 0.06 })
+  },
+
+  // —— 大鱼吃小鱼 ——
+
+  // 吞咽：水声"咕嘟"，pitch 随猎物大小
+  gulp(step = 0) {
+    const k = 1 + Math.min(step, 6) * 0.08
+    tone({ freq: 340 * k, end: 90, dur: 0.16, type: 'sine', vol: 0.3 })
+    tone({ freq: 170 * k, end: 60, dur: 0.22, type: 'sine', vol: 0.16, delay: 0.06 })
+    noise({ dur: 0.08, vol: 0.1, lowpass: 900 })
+  },
+
+  // 被咬：闷响 + 低鸣
+  bite() {
+    noise({ dur: 0.3, vol: 0.32, lowpass: 700 })
+    tone({ freq: 190, end: 55, dur: 0.35, type: 'sawtooth', vol: 0.26 })
+  },
+
+  // 升级/进化：上行琶音
+  evolve() {
+    ;[392, 523.25, 659.25, 880].forEach((f, i) =>
+      tone({ freq: f, dur: 0.12, type: 'triangle', vol: 0.14, delay: i * 0.07 })
+    )
+  },
+
+  // —— 笨鸟先飞 ——
+
+  // 振翅：短促气声
+  flap() {
+    noise({ dur: 0.09, vol: 0.16, lowpass: 2200 })
+    tone({ freq: 480, end: 700, dur: 0.06, type: 'triangle', vol: 0.08 })
+  },
+
+  // 过柱得分
+  ding() {
+    tone({ freq: 1174.7, dur: 0.09, type: 'triangle', vol: 0.12 })
+    tone({ freq: 1568, dur: 0.12, type: 'triangle', vol: 0.1, delay: 0.06 })
+  },
+
+  // 撞击：钝痛
+  crash() {
+    noise({ dur: 0.28, vol: 0.4, lowpass: 1100 })
+    tone({ freq: 220, end: 60, dur: 0.3, type: 'square', vol: 0.22 })
+  },
+
+  // —— 剑客对决 ——
+
+  // 挥剑：气刃声
+  slash() {
+    noise({ dur: 0.12, vol: 0.2, lowpass: 4200 })
+    tone({ freq: 900, end: 260, dur: 0.1, type: 'sawtooth', vol: 0.08 })
+  },
+
+  // 剑刃相格：金属声
+  clank() {
+    tone({ freq: 2600, end: 1900, dur: 0.07, type: 'square', vol: 0.14 })
+    tone({ freq: 3400, end: 2400, dur: 0.05, type: 'square', vol: 0.1, delay: 0.02 })
+    noise({ dur: 0.06, vol: 0.14, lowpass: 5000 })
+  },
+
+  // 命中：厚实的打击声
+  hitHeavy() {
+    noise({ dur: 0.16, vol: 0.36, lowpass: 1500 })
+    tone({ freq: 260, end: 80, dur: 0.18, type: 'square', vol: 0.26 })
+  },
+
+  // 回合开场铃
+  roundBell() {
+    tone({ freq: 880, dur: 0.5, type: 'triangle', vol: 0.16 })
+    tone({ freq: 1760, dur: 0.4, type: 'sine', vol: 0.08, delay: 0.04 })
+  },
+
+  // KO 锣声
+  koGong() {
+    tone({ freq: 196, end: 98, dur: 1.4, type: 'sine', vol: 0.3 })
+    tone({ freq: 294, end: 147, dur: 1.1, type: 'triangle', vol: 0.12, delay: 0.02 })
+    noise({ dur: 0.5, vol: 0.2, lowpass: 900 })
+  },
 }
 
 // —— 芯片音乐循环（贪吃蛇背景乐）：A 小调五声，低音 + 琶音 + 帽 ——

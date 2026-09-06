@@ -1,0 +1,54 @@
+/* ============================================================
+   笨鸟先飞 · 夜航界面
+   ============================================================ */
+
+.bd-panel {
+  padding: 14px;
+}
+
+.bd-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 2px 2px 0;
+}
+
+.bd-toolbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bd-shell {
+  justify-content: center;
+  max-width: 482px;
+  margin: 0 auto;
+}
+
+.bd-canvas {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 480 / 600;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .bd-toolbar {
+    width: 100%;
+  }
+
+  .bd-toolbar .gm-seg {
+    flex: 1;
+  }
+
+  .bd-toolbar-right {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+}

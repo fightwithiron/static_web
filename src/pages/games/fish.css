@@ -1,0 +1,124 @@
+/* ============================================================
+   大鱼吃小鱼 · 深海界面
+   ============================================================ */
+
+.ff-panel {
+  padding: 14px;
+}
+
+.ff-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 2px 2px 0;
+}
+
+.ff-toolbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ---------- HUD ---------- */
+
+.ff-hud {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 2px 10px;
+}
+
+/* ---------- 成长条 ---------- */
+
+.ff-growth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 2px 12px;
+}
+
+.ff-growth-label {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  flex: none;
+}
+
+.ff-growth-track {
+  position: relative;
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(125, 211, 252, 0.12);
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  overflow: visible;
+}
+
+.ff-growth-fill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(to right, #38bdf8, #4ade80);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  transition: width 0.25s ease;
+}
+
+.ff-growth-fill[data-stage='3'] {
+  background: linear-gradient(to right, #fbbf24, #f472b6);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
+}
+
+.ff-growth-mark {
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  background: rgba(226, 232, 240, 0.45);
+  border-radius: 1px;
+}
+
+/* ---------- 棋盘/画布 ---------- */
+
+.ff-shell {
+  max-height: none;
+}
+
+.ff-canvas {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 800 / 520;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 720px) {
+  .ff-toolbar {
+    width: 100%;
+  }
+
+  .ff-toolbar .gm-seg {
+    flex: 1;
+  }
+
+  .ff-toolbar-right {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+
+  .ff-hud {
+    gap: 8px;
+  }
+}

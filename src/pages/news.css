@@ -1,0 +1,306 @@
+/* ============================================================
+   今日资讯站 · 卡片流
+   ============================================================ */
+
+.nw-wrap {
+  --gm-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 44px 24px 72px;
+  position: relative;
+  z-index: 1;
+}
+
+.nw-panel {
+  padding: 16px;
+  min-height: 420px;
+}
+
+.nw-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+}
+
+.nw-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.nw-tab {
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  transition: all 0.16s ease;
+}
+
+.nw-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nw-tab.active {
+  color: #bfdbfe;
+  background: rgba(96, 165, 250, 0.14);
+  border-color: rgba(96, 165, 250, 0.35);
+}
+
+/* ---------- 加载骨架 ---------- */
+
+.nw-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 4px;
+}
+
+.nw-skeleton {
+  height: 44px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
+  background-size: 200% 100%;
+  animation: nw-shimmer 1.4s linear infinite;
+}
+
+@keyframes nw-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.nw-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 60px 20px;
+  color: #fca5a5;
+  font-size: 14px;
+  text-align: center;
+}
+
+.nw-error-sub {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* ---------- 今日要闻 ---------- */
+
+.nw-news-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 4px 6px 12px;
+}
+
+.nw-news-date {
+  font-family: var(--gm-mono);
+  font-size: 15px;
+  font-weight: 650;
+  color: #bfdbfe;
+  letter-spacing: 0.06em;
+}
+
+.nw-news-tip {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.nw-news-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.nw-news-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 10px 6px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.nw-news-list li:last-child {
+  border-bottom: none;
+}
+
+.nw-news-list em {
+  font-family: var(--gm-mono);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 650;
+  color: #60a5fa;
+  flex: none;
+}
+
+.nw-news-img {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- 热搜榜 ---------- */
+
+.nw-hotlist {
+  display: flex;
+  flex-direction: column;
+}
+
+.nw-hot-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 11px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+  text-align: left;
+  transition: background 0.13s ease;
+  width: 100%;
+}
+
+.nw-hot-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nw-hot-item:last-child {
+  border-bottom: none;
+}
+
+.nw-hot-item em {
+  font-family: var(--gm-mono);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+  width: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  flex: none;
+}
+
+.nw-hot-item em.top {
+  color: #f87171;
+}
+
+.nw-hot-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.nw-hot-title small {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.nw-hot-item b {
+  font-family: var(--gm-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: #fb923c;
+  flex: none;
+}
+
+/* ---------- Epic ---------- */
+
+.nw-epic {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.nw-epic-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.18s ease;
+  text-align: left;
+  padding: 0;
+}
+
+.nw-epic-card:hover {
+  border-color: rgba(96, 165, 250, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
+}
+
+.nw-epic-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.nw-epic-info {
+  padding: 13px 15px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.nw-epic-title {
+  font-size: 14.5px;
+  font-weight: 650;
+  color: var(--text-primary);
+}
+
+.nw-epic-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.nw-epic-price {
+  font-size: 12px;
+  color: #6ee7b7;
+}
+
+.nw-epic-price s {
+  color: var(--text-muted);
+}
+
+.nw-footnote {
+  margin-top: 14px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .nw-toolbar {
+    width: 100%;
+  }
+
+  .nw-tabs {
+    width: 100%;
+  }
+
+  .nw-tab {
+    flex: 1;
+    text-align: center;
+    padding: 7px 8px;
+  }
+}

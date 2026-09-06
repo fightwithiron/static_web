@@ -1,0 +1,269 @@
+/* ============================================================
+   打字测速场 · 逐字高亮
+   输入层是覆盖在展示层上的透明 textarea：
+   桌面直接打字，移动端唤起系统输入法（不显示任何自绘键盘）。
+   ============================================================ */
+
+.tp-panel {
+  padding: 14px;
+}
+
+.tp-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 2px 2px 0;
+}
+
+.tp-toolbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ---------- 实时数据 ---------- */
+
+.tp-live {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 2px 12px;
+}
+
+.tp-live-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 72px;
+}
+
+.tp-live-item small {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.tp-live-item b {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 21px;
+  font-weight: 650;
+  color: #7dd3fc;
+  line-height: 1.2;
+}
+
+/* ---------- 进度条 ---------- */
+
+.tp-progress {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.tp-progress i {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.15s linear;
+}
+
+/* ---------- 文字展示区 ---------- */
+
+.tp-display {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 22px 24px;
+  min-height: 220px;
+  max-height: 300px;
+  overflow-y: auto;
+  cursor: text;
+  transition: border-color 0.18s ease;
+}
+
+.tp-display:focus-within {
+  border-color: rgba(125, 211, 252, 0.45);
+}
+
+.tp-display.locked {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.tp-ch {
+  font-size: 19px;
+  line-height: 2.05;
+  letter-spacing: 0.02em;
+  border-radius: 3px;
+  padding: 0 0.5px;
+}
+
+.tp-ch.pending {
+  color: rgba(226, 232, 240, 0.55);
+}
+
+.tp-ch.correct {
+  color: #e2e8f0;
+}
+
+.tp-ch.wrong {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.14);
+  text-decoration: underline wavy rgba(248, 113, 113, 0.6) 1.5px;
+  text-underline-offset: 4px;
+}
+
+.tp-ch.current {
+  background: rgba(125, 211, 252, 0.18);
+  box-shadow: inset 2px 0 0 #38bdf8;
+  animation: tp-caret-blink 1.05s step-end infinite;
+}
+
+@keyframes tp-caret-blink {
+  0%, 100% { box-shadow: inset 2px 0 0 #38bdf8; }
+  50% { box-shadow: inset 2px 0 0 transparent; }
+}
+
+/* 透明输入层：盖在展示区上，点击即聚焦 */
+.tp-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-size: 16px; /* ≥16px 防止 iOS 聚焦时自动放大 */
+  overflow: hidden;
+  cursor: text;
+}
+
+/* ---------- 就绪提示 ---------- */
+
+.tp-ready {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(8, 10, 16, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.tp-ready p {
+  font-size: 14px;
+  color: #bae6fd;
+}
+
+.tp-ready .tp-ready-sub {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* ---------- 成绩 ---------- */
+
+.tp-result {
+  margin-top: 14px;
+  border: 1px solid rgba(125, 211, 252, 0.25);
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.06);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  animation: rt-result-in 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.tp-result-title {
+  font-size: 15px;
+  font-weight: 650;
+  color: #bae6fd;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tp-result-grid {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tp-result-grid span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.tp-result-grid small {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.tp-result-grid b {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 26px;
+  font-weight: 700;
+  color: #7dd3fc;
+}
+
+.tp-result-grid b i {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-left: 3px;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 720px) {
+  .tp-toolbar {
+    width: 100%;
+  }
+
+  .tp-toolbar .gm-seg {
+    flex: 1;
+  }
+
+  .tp-toolbar .gm-seg-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .tp-toolbar-right {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+
+  .tp-display {
+    padding: 16px;
+    max-height: 260px;
+  }
+
+  .tp-ch {
+    font-size: 17px;
+  }
+}

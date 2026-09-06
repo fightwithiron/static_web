@@ -348,6 +348,313 @@
   50% { transform: scale(1.25); }
 }
 
+/* ---------- 卡片预览：电子木鱼 ---------- */
+
+.gm-art-fish {
+  background:
+    radial-gradient(90% 120% at 50% 0%, rgba(214, 163, 115, 0.12) 0%, transparent 60%),
+    rgba(0, 0, 0, 0.3);
+}
+
+.gm-fish-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gm-fish-body {
+  font-size: 44px;
+  filter: drop-shadow(0 8px 18px rgba(214, 163, 115, 0.35));
+  animation: gm-fish-knock 1.9s ease-in-out infinite;
+}
+
+@keyframes gm-fish-knock {
+  0%, 70%, 100% { transform: scale(1) rotate(0deg); }
+  78% { transform: scale(0.9, 0.86) rotate(-4deg); }
+  88% { transform: scale(1.04) rotate(2deg); }
+}
+
+.gm-fish-ripple {
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 2px solid rgba(214, 163, 115, 0.5);
+  animation: gm-fish-ripple 1.9s ease-out infinite;
+}
+
+@keyframes gm-fish-ripple {
+  0%, 70% { transform: scale(0.5); opacity: 0; }
+  74% { opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.gm-fish-float {
+  position: absolute;
+  top: -6px;
+  right: 4px;
+  font-size: 12px;
+  font-weight: 650;
+  color: #e8c9a0;
+  opacity: 0;
+  animation: gm-fish-float 1.9s ease-out infinite;
+}
+
+@keyframes gm-fish-float {
+  0%, 74% { opacity: 0; transform: translateY(6px); }
+  84% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* ---------- 卡片预览：许愿池 ---------- */
+
+.gm-art-wish {
+  background:
+    radial-gradient(100% 100% at 50% 100%, rgba(150, 168, 230, 0.1) 0%, transparent 55%),
+    linear-gradient(180deg, #0a0d18 0%, #0c1220 100%);
+}
+
+.gm-wish-sky {
+  position: relative;
+  width: 200px;
+  height: 110px;
+}
+
+.gm-wish-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #cdd6ff;
+  animation: gm-star-twinkle 2.4s ease-in-out infinite;
+}
+
+.gm-wish-star.x1 { left: 18%; top: 24%; }
+.gm-wish-star.x2 { left: 62%; top: 14%; animation-delay: -0.9s; }
+.gm-wish-star.x3 { left: 84%; top: 42%; animation-delay: -1.7s; }
+
+@keyframes gm-star-twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+.gm-wish-lantern {
+  position: absolute;
+  left: 46%;
+  bottom: -4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50% 50% 42% 42%;
+  background: #fbbf24;
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.8);
+  animation: gm-lantern-rise 4.2s ease-in-out infinite;
+}
+
+@keyframes gm-lantern-rise {
+  0% { transform: translateY(26px) scale(0.7); opacity: 0; }
+  25% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-72px) translateX(14px) scale(1); opacity: 0; }
+}
+
+/* ---------- 卡片预览：大转盘 ---------- */
+
+.gm-wheel-ring {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #f59e0b 0 45deg, #2dd4bf 45deg 90deg, #60a5fa 90deg 135deg, #f472b6 135deg 180deg,
+    #a78bfa 180deg 225deg, #34d399 225deg 270deg, #fbbf24 270deg 315deg, #f87171 315deg 360deg
+  );
+  opacity: 0.9;
+  animation: gm-wheel-spin 9s linear infinite;
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.25), inset 0 0 0 4px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes gm-wheel-spin {
+  to { transform: rotate(360deg); }
+}
+
+.gm-wheel-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, transparent 68%);
+}
+
+.gm-wheel-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #15151f;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fde68a;
+  animation: gm-wheel-hub-still 9s linear infinite;
+}
+
+@keyframes gm-wheel-hub-still {
+  to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+.gm-wheel-pointer {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10px solid #fbbf24;
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* ---------- 卡片预览：捏泡泡 ---------- */
+
+.gm-bubble-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 26px);
+  gap: 8px;
+}
+
+.gm-bubble {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.14) 24%, transparent 44%),
+    radial-gradient(circle at 50% 55%, rgba(125, 211, 252, 0.25) 0%, rgba(80, 110, 170, 0.18) 100%);
+  box-shadow: inset 0 -2px 4px rgba(10, 16, 30, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.gm-bubble.pop-a { animation: gm-bubble-pop 2.6s ease-in-out infinite; }
+.gm-bubble.pop-b { animation: gm-bubble-pop 2.6s ease-in-out -1.3s infinite; }
+
+@keyframes gm-bubble-pop {
+  0%, 55%, 100% { transform: scale(1); opacity: 1; }
+  62% { transform: scale(1.25); filter: brightness(1.7); }
+  70%, 96% { transform: scale(0.85); opacity: 0.35; }
+}
+
+/* ---------- 卡片预览：打字 ---------- */
+
+.gm-typing-lines {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gm-typing-lines p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 8px;
+}
+
+.gm-typing-lines i {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(125, 211, 252, 0.3);
+}
+
+.gm-typing-lines p:first-child i {
+  background: rgba(125, 211, 252, 0.75);
+}
+
+.gm-typing-lines .caret {
+  width: 7px;
+  height: 11px;
+  border-radius: 2px;
+  background: #38bdf8;
+  animation: gm-caret-blink 1s step-end infinite;
+}
+
+@keyframes gm-caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
+}
+
+/* ---------- 卡片预览：五子棋 ---------- */
+
+.gm-art-gomoku {
+  background:
+    radial-gradient(90% 130% at 50% 0%, rgba(251, 191, 36, 0.1) 0%, transparent 58%),
+    rgba(0, 0, 0, 0.3);
+}
+
+.gm-gomoku-board {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border: 1px solid rgba(200, 210, 235, 0.28);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 30px, rgba(200, 210, 235, 0.22) 30px 31px),
+    repeating-linear-gradient(90deg, transparent 0 30px, rgba(200, 210, 235, 0.22) 30px 31px),
+    #141824;
+  transform: rotate(-4deg);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.gm-stone {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.gm-stone.black {
+  background: radial-gradient(circle at 32% 28%, #4a4f5e, #08090d);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.gm-stone.white {
+  background: radial-gradient(circle at 32% 28%, #ffffff, #b6bcc9);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.gm-stone.s1 { left: 12px; top: 14px; }
+.gm-stone.s2 { left: 44px; top: 34px; }
+.gm-stone.s3 { left: 22px; top: 62px; }
+.gm-stone.s4 { left: 74px; top: 66px; }
+
+.gm-stone.s5.last {
+  left: 86px;
+  top: 24px;
+  animation: gm-stone-drop 2.6s ease-in-out infinite;
+}
+
+.gm-stone.s5.last::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fbbf24;
+}
+
+@keyframes gm-stone-drop {
+  0%, 55%, 100% { transform: translateY(0) scale(1); }
+  62% { transform: translateY(-7px) scale(1.08); }
+  72% { transform: translateY(0) scale(0.94); }
+}
+
 /* ---------- 卡片预览：敬请期待 ---------- */
 
 .gm-art-more span {
@@ -396,4 +703,254 @@
     0%, 100% { transform: translate(12px, 40px); }
     50% { transform: translate(150px, 14px); }
   }
+}
+
+/* ---------- 卡片预览：大鱼吃小鱼 ---------- */
+
+.gm-art-fishtank {
+  position: relative;
+  overflow: hidden;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(56, 189, 248, 0.16) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(13, 34, 56, 0.8), rgba(6, 16, 25, 0.9));
+}
+
+.gm-fish {
+  position: absolute;
+  width: 34%;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.gm-fish.prey {
+  width: 20%;
+  top: 58%;
+  left: 8%;
+  opacity: 0.85;
+  animation: gm-fishtank-prey 5.2s ease-in-out infinite;
+}
+
+.gm-fish.hero {
+  top: 24%;
+  left: -38%;
+  animation: gm-fishtank-hero 5.2s ease-in-out infinite;
+}
+
+@keyframes gm-fishtank-hero {
+  0% { transform: translateX(0) translateY(0); }
+  48% { transform: translateX(290%) translateY(8px); }
+  52% { transform: translateX(300%) translateY(8px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes gm-fishtank-prey {
+  0%, 55% { transform: translateX(0); }
+  100% { transform: translateX(160%); }
+}
+
+.gm-fish-weed {
+  position: absolute;
+  bottom: -4%;
+  width: 14%;
+  aspect-ratio: 1;
+  background: url('/games/fish/seaweed_grass_a.png') center / contain no-repeat;
+  opacity: 0.7;
+}
+
+.gm-fish-weed.w1 { left: 6%; transform: rotate(-4deg); }
+.gm-fish-weed.w2 { right: 8%; transform: scaleX(-1) rotate(3deg); }
+
+.gm-fish-bubble {
+  position: absolute;
+  border: 1px solid rgba(190, 225, 255, 0.55);
+  border-radius: 50%;
+  animation: gm-fishtank-bubble 3.2s linear infinite;
+}
+
+.gm-fish-bubble.b1 { left: 30%; width: 6px; height: 6px; }
+.gm-fish-bubble.b2 { left: 55%; width: 4px; height: 4px; animation-delay: 1.1s; }
+.gm-fish-bubble.b3 { left: 78%; width: 8px; height: 8px; animation-delay: 2s; }
+
+@keyframes gm-fishtank-bubble {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(-90px); opacity: 0; }
+}
+
+/* ---------- 卡片预览：笨鸟先飞 ---------- */
+
+.gm-art-birdsky {
+  position: relative;
+  overflow: hidden;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(100% 90% at 78% 12%, rgba(226, 232, 240, 0.14) 0%, transparent 42%),
+    linear-gradient(180deg, #0b1226 0%, #16203a 62%, #223052 100%);
+}
+
+.gm-bird-pipe {
+  position: absolute;
+  width: 15%;
+  top: 0;
+  bottom: 18%;
+  background: linear-gradient(90deg, rgba(12, 31, 38, 0.95), rgba(18, 51, 61, 0.95));
+  border: 1.5px solid rgba(56, 189, 248, 0.55);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.18) inset;
+}
+
+.gm-bird-pipe.p1 { left: 16%; height: 34%; bottom: auto; border-radius: 0 0 3px 3px; }
+.gm-bird-pipe.p2 { right: 18%; }
+
+.gm-bird-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #dbeafe;
+  animation: gm-bird-twinkle 2.4s ease-in-out infinite;
+}
+
+.gm-bird-star.s1 { left: 12%; top: 18%; }
+.gm-bird-star.s2 { left: 46%; top: 12%; animation-delay: 0.8s; }
+.gm-bird-star.s3 { left: 74%; top: 26%; animation-delay: 1.5s; }
+
+@keyframes gm-bird-twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.95; }
+}
+
+.gm-bird {
+  position: absolute;
+  left: 40%;
+  top: 44%;
+  width: 15%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle at 36% 34%, #fde68a 0%, #fbbf24 52%, #d97706 100%);
+  border-radius: 50% 50% 46% 54%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+  animation: gm-bird-bob 2.1s ease-in-out infinite;
+}
+
+.gm-bird::after {
+  content: '';
+  position: absolute;
+  right: -16%;
+  top: 40%;
+  width: 26%;
+  height: 18%;
+  background: #fb923c;
+  clip-path: polygon(0 12%, 100% 50%, 0 88%);
+}
+
+.gm-bird-wing {
+  position: absolute;
+  left: 8%;
+  top: 34%;
+  width: 46%;
+  height: 34%;
+  background: #d97706;
+  border-radius: 62% 38% 55% 45% / 60% 55% 45% 40%;
+  transform-origin: 82% 30%;
+  animation: gm-bird-flap 0.62s ease-in-out infinite;
+}
+
+@keyframes gm-bird-flap {
+  0%, 100% { transform: rotate(14deg); }
+  50% { transform: rotate(-26deg); }
+}
+
+@keyframes gm-bird-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9%); }
+}
+
+/* ---------- 卡片预览：剑客对决 ---------- */
+
+.gm-art-duel {
+  position: relative;
+  overflow: hidden;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(110% 90% at 50% 100%, rgba(248, 113, 113, 0.1) 0%, transparent 55%),
+    linear-gradient(180deg, #2b3560 0%, #3d4a78 55%, #232c47 100%);
+}
+
+.gm-duel-hp {
+  position: absolute;
+  top: 12%;
+  width: 34%;
+  height: 7px;
+  border: 1px solid rgba(226, 232, 240, 0.3);
+  border-radius: 3px;
+  background: rgba(8, 10, 16, 0.6);
+  overflow: hidden;
+}
+
+.gm-duel-hp.p1 { left: 7%; }
+.gm-duel-hp.p2 { right: 7%; }
+
+.gm-duel-hp i {
+  display: block;
+  height: 100%;
+}
+
+.gm-duel-hp.p1 i {
+  width: 72%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+.gm-duel-hp.p2 i {
+  width: 64%;
+  background: linear-gradient(90deg, #dc2626, #f87171);
+}
+
+.gm-duel-fighter {
+  position: absolute;
+  bottom: 12%;
+  width: 26%;
+  aspect-ratio: 100 / 59;
+  background: url('/games/fight/hero-idle-right.png') 0 0 / 400% 100% no-repeat;
+  animation: gm-duel-idle 1.6s steps(4) infinite;
+}
+
+.gm-duel-fighter.left {
+  left: 14%;
+}
+
+.gm-duel-fighter.right {
+  right: 14%;
+  transform: scaleX(-1);
+  filter: hue-rotate(155deg) saturate(1.25) brightness(0.92);
+  animation-delay: -0.8s;
+}
+
+@keyframes gm-duel-idle {
+  from { background-position: 0 0; }
+  to { background-position: 100% 0; }
+}
+
+.gm-duel-spark {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(254, 243, 199, 0.9);
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.9);
+  animation: gm-duel-spark 2.2s ease-in infinite;
+}
+
+@keyframes gm-duel-spark {
+  0%, 72%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+  78% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
+  90% { opacity: 0.4; transform: translate(-50%, -50%) scale(2.4); }
 }

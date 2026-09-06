@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { sfx } from '../../utils/sound'
+import { useConfetti, ConfettiLayer } from '../../components/Confetti'
 import './games.css'
 import './minesweeper.css'
 
@@ -127,7 +128,9 @@ export default function Minesweeper() {
   const [soundOn, setSoundOn] = useState(() => localStorage.getItem('ms-sound') !== 'off')
   const [best, setBest] = useState(() => readBest(DIFFS[0].id))
   const [shake, setShake] = useState(false)
-  const [confetti, setConfetti] = useState([])
+  const { pieces: confetti, burst } = useConfetti({
+    colors: ['#f59e0b', '#34d399', '#60a5fa', '#f472b6', '#fbbf24', '#a78bfa'],
+  })
 
   const minesPlaced = useRef(false)
   const soundRef = useRef(soundOn)
@@ -162,27 +165,12 @@ export default function Minesweeper() {
 
   const finished = status === 'won' || status === 'lost'
 
-  const celebrateWin = useCallback(() => {
-    const palette = ['#f59e0b', '#34d399', '#60a5fa', '#f472b6', '#fbbf24', '#a78bfa']
-    const pieces = Array.from({ length: 80 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      delay: Math.random() * 0.6,
-      dur: 1.7 + Math.random() * 1.4,
-      color: palette[i % palette.length],
-      size: 6 + Math.random() * 7,
-      drift: (Math.random() - 0.5) * 160,
-    }))
-    setConfetti(pieces)
-    setTimeout(() => setConfetti([]), 3600)
-  }, [])
-
   const checkWin = useCallback((next, revealedCount) => {
     const hiddenSafe = next.length - diff.mines
     if (revealedCount > 0 && next.filter((c) => c.revealed).length >= hiddenSafe) {
       setStatus('won')
       play(sfx.win)
-      celebrateWin()
+      burst()
       const prevBest = readBest(diff.id)
       if (prevBest === null || time < prevBest) {
         try {
@@ -193,7 +181,7 @@ export default function Minesweeper() {
       return true
     }
     return false
-  }, [diff, time, play, celebrateWin])
+  }, [diff, time, play, burst])
 
   const lose = useCallback((boomIdx) => {
     setBoard((prev) => {
@@ -380,24 +368,7 @@ export default function Minesweeper() {
               ))}
             </div>
           </div>
-          {confetti.length > 0 && (
-            <div className="ms-confetti" aria-hidden="true">
-              {confetti.map((p) => (
-                <i
-                  key={p.id}
-                  style={{
-                    left: `${p.left}%`,
-                    width: p.size,
-                    height: p.size * 0.46,
-                    background: p.color,
-                    animationDelay: `${p.delay}s`,
-                    animationDuration: `${p.dur}s`,
-                    '--drift': `${p.drift}px`,
-                  }}
-                />
-              ))}
-            </div>
-          )}
+          <ConfettiLayer pieces={confetti} />
         </div>
 
         <div className="ms-infobar">
