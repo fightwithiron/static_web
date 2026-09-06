@@ -212,7 +212,70 @@ input, textarea {
 .hero-subtitle {
   font-size: 1.25rem;
   color: var(--text-secondary);
-  margin-bottom: 48px;
+  margin-bottom: 20px;
+}
+
+/* —— 首页反馈条：GitHub / 邮箱 —— */
+.hero-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  max-width: 640px;
+  margin: 0 auto 56px;
+  padding: 9px 18px;
+  border: 1px solid var(--gm-hairline, rgba(255, 255, 255, 0.1));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.hf-badge {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  padding: 2.5px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: rgba(251, 191, 36, 0.9);
+  background: rgba(251, 191, 36, 0.07);
+}
+
+.hf-text {
+  letter-spacing: 0.06em;
+}
+
+.hf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.18s ease;
+}
+
+.hf-link svg {
+  opacity: 0.75;
+  transition: opacity 0.18s ease;
+}
+
+.hf-link:hover {
+  color: #7dd3fc;
+}
+
+.hf-link:hover svg {
+  opacity: 1;
+}
+
+.hf-sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .section-title {
@@ -567,6 +630,17 @@ input, textarea {
 
   .hero-subtitle {
     font-size: 1rem;
+  }
+
+  .hero-feedback {
+    max-width: calc(100% - 32px);
+    font-size: 11px;
+    gap: 8px 10px;
+    padding: 8px 14px;
+  }
+
+  .hf-sep {
+    display: none;
   }
 
   .toys-grid {
