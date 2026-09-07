@@ -954,3 +954,83 @@
   78% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
   90% { opacity: 0.4; transform: translate(-50%, -50%) scale(2.4); }
 }
+
+/* ---------- 卡片预览：霓虹方块 ---------- */
+
+.gm-art-neontris {
+  position: relative;
+  overflow: hidden;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(110% 90% at 50% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
+    linear-gradient(180deg, #0a1124 0%, #101a36 100%);
+}
+
+.gm-tris-cell {
+  position: absolute;
+  width: 15%;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  border: 1px solid rgba(8, 10, 16, 0.5);
+  animation: gm-tris-breathe 2.6s ease-in-out infinite;
+}
+
+.gm-tris-cell::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  top: 8%;
+  width: 80%;
+  height: 38%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.gm-tris-cell.c1 { background: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.55); }
+.gm-tris-cell.c2 { background: #e879f9; box-shadow: 0 0 10px rgba(232, 121, 249, 0.55); }
+.gm-tris-cell.c3 { background: #4ade80; box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); }
+.gm-tris-cell.c4 { background: #fb923c; box-shadow: 0 0 10px rgba(251, 146, 60, 0.5); }
+.gm-tris-cell.c5 { background: #facc15; box-shadow: 0 0 10px rgba(250, 204, 21, 0.5); animation: gm-tris-fall 3.2s ease-in infinite; }
+
+.gm-tris-cell.x0 { left: 12%; }
+.gm-tris-cell.x1 { left: 28%; }
+.gm-tris-cell.x2 { left: 44%; }
+.gm-tris-cell.x3 { left: 60%; }
+
+.gm-tris-cell.y0 { top: 6%; }
+.gm-tris-cell.y1 { top: 20%; }
+.gm-tris-cell.y7 { top: 52%; }
+.gm-tris-cell.y8 { top: 66%; }
+.gm-tris-cell.y9 { top: 80%; }
+
+@keyframes gm-tris-breathe {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.25); }
+}
+
+@keyframes gm-tris-fall {
+  0%, 55% { transform: translateY(0); }
+  100% { transform: translateY(340%); }
+}
+
+.gm-tris-flash {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 78%;
+  height: 14%;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  animation: gm-tris-clear 3.2s ease-out infinite;
+}
+
+@keyframes gm-tris-clear {
+  0%, 52% { opacity: 0; transform: scaleX(1); }
+  60% { opacity: 0.95; }
+  75% { opacity: 0; transform: scaleX(0.6); }
+  100% { opacity: 0; }
+}

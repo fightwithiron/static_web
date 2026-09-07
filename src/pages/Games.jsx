@@ -10,6 +10,7 @@ const BEST_KEYS = {
   '/games/fishfeast': { keys: ['fish-record-easy', 'fish-record-hard'], fmt: 'fish' },
   '/games/bird': { keys: ['bird-record-easy', 'bird-record-hard'], fmt: 'bird' },
   '/games/duel': { keys: ['duel-record-easy', 'duel-record-hard'], fmt: 'duel' },
+  '/games/tetris': { keys: ['tetris-best'], fmt: 'score' },
 }
 
 function readBest(path) {
@@ -182,6 +183,26 @@ function BirdArt() {
   )
 }
 
+function TetrisArt() {
+  return (
+    <div className="gm-art gm-art-neontris" aria-hidden="true">
+      <i className="gm-tris-cell c1 x0 y9" />
+      <i className="gm-tris-cell c1 x1 y9" />
+      <i className="gm-tris-cell c2 x1 y8" />
+      <i className="gm-tris-cell c3 x0 y8" />
+      <i className="gm-tris-cell c3 x0 y7" />
+      <i className="gm-tris-cell c4 x3 y9" />
+      <i className="gm-tris-cell c4 x3 y8" />
+      <i className="gm-tris-cell c4 x2 y9" />
+      <i className="gm-tris-cell c5 x1 y0" />
+      <i className="gm-tris-cell c5 x2 y0" />
+      <i className="gm-tris-cell c5 x1 y1" />
+      <i className="gm-tris-cell c5 x2 y1" />
+      <i className="gm-tris-flash" />
+    </div>
+  )
+}
+
 function DuelArt() {
   return (
     <div className="gm-art gm-art-duel" aria-hidden="true">
@@ -302,6 +323,15 @@ export default function Games() {
       accent: '#f87171',
       art: <DuelArt />,
       tag: '格斗 · 人机',
+    },
+    {
+      path: '/games/tetris',
+      name: '霓虹方块',
+      en: 'NEON TETRIS',
+      desc: '深夜机台里的霓虹方块：踢墙、Hold、幽灵落点，四连消有惊喜。',
+      accent: '#38bdf8',
+      art: <TetrisArt />,
+      tag: '经典 · 益智',
     },
   ]
 

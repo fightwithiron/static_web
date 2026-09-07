@@ -1,0 +1,68 @@
+/* ============================================================
+   霓虹方块 · 深夜机台界面
+   ============================================================ */
+
+.tt-panel {
+  padding: 14px;
+}
+
+.tt-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 2px 2px 0;
+}
+
+.tt-keys {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+.tt-keys span {
+  padding: 3px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tt-toolbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tt-shell {
+  justify-content: center;
+  max-width: 472px;
+  margin: 0 auto;
+}
+
+.tt-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 470 / 560;
+  touch-action: none;
+}
+
+.tt-touch {
+  padding-top: 10px;
+}
+
+@media (max-width: 720px) {
+  .tt-keys {
+    display: none;
+  }
+
+  .tt-toolbar-right {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+}

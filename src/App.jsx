@@ -8,6 +8,7 @@ import Games from './pages/Games.jsx'
 import PixelAvatar from './pages/PixelAvatar.jsx'
 import Qrcode from './pages/Qrcode.jsx'
 import News from './pages/News.jsx'
+import FunClock from './pages/FunClock.jsx'
 import Minesweeper from './pages/games/Minesweeper.jsx'
 import Snake from './pages/games/Snake.jsx'
 import WoodenFish from './pages/games/WoodenFish.jsx'
@@ -19,6 +20,7 @@ import Gomoku from './pages/games/Gomoku.jsx'
 import FishFeast from './pages/games/FishFeast.jsx'
 import BirdFly from './pages/games/BirdFly.jsx'
 import Duel from './pages/games/Duel.jsx'
+import Tetris from './pages/games/Tetris.jsx'
 
 export default function App() {
   return (
@@ -32,6 +34,7 @@ export default function App() {
           <Route path="/pixel-avatar" element={<PixelAvatar />} />
           <Route path="/qrcode" element={<Qrcode />} />
           <Route path="/news" element={<News />} />
+          <Route path="/clock" element={<FunClock />} />
           <Route path="/games" element={<Games />} />
           <Route path="/games/minesweeper" element={<Minesweeper />} />
           <Route path="/games/snake" element={<Snake />} />
@@ -44,6 +47,7 @@ export default function App() {
           <Route path="/games/fishfeast" element={<FishFeast />} />
           <Route path="/games/bird" element={<BirdFly />} />
           <Route path="/games/duel" element={<Duel />} />
+          <Route path="/games/tetris" element={<Tetris />} />
         </Routes>
       </main>
       <Footer />

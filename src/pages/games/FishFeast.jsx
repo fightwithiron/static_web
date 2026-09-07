@@ -44,11 +44,11 @@ const SPRITE_SCALE = 128 / 104
 
 const STAGES = [
   { name: '鱼苗', len: 0 },
-  { name: '小鱼', len: 62 },
-  { name: '大鱼', len: 88 },
-  { name: '深海霸主', len: 118 },
+  { name: '小鱼', len: 70 },
+  { name: '大鱼', len: 102 },
+  { name: '深海霸主', len: 134 },
 ]
-const LEN_MAX = 150
+const LEN_MAX = 170
 const START_LEN = 46
 
 const CW = 800, CH = 520
@@ -56,9 +56,11 @@ const CW = 800, CH = 520
 const rand = (a, b) => a + Math.random() * (b - a)
 const pick = (arr) => arr[(Math.random() * arr.length) | 0]
 
+// 数值目标：单局 ≈ 2 分钟。成长系数 0.06 × 平均猎物收益(≈0.5×自身体长)
+// ≈ 每条猎物 +3.5% 体长，46→134 需 ~31 条 + 霸主后 10 条，熟练玩家单局约 2 分钟
 const LEVELS = {
-  easy: { speed: 0.85, threat: 0.18, pop: 12, eatRatio: 0.92, dangerRatio: 1.12, threatSpread: 0.38 },
-  hard: { speed: 1.12, threat: 0.3, pop: 13, eatRatio: 0.88, dangerRatio: 1.1, threatSpread: 0.5 },
+  easy: { speed: 0.85, threat: 0.18, pop: 9, eatRatio: 0.92, dangerRatio: 1.12, threatSpread: 0.38, smallShare: 0.72, smallMin: 0.32 },
+  hard: { speed: 1.12, threat: 0.36, pop: 10, eatRatio: 0.88, dangerRatio: 1.1, threatSpread: 0.5, smallShare: 0.55, smallMin: 0.44 },
 }
 
 // 底部装饰：岩石 + 水草（位置固定，绘制时随时间轻摆）
@@ -203,8 +205,8 @@ export default function FishFeast() {
       // 天敌：比玩家大一圈，其中部分是长条掠食鱼
       len = p.len * rand(lv.dangerRatio, lv.dangerRatio + lv.threatSpread)
     } else {
-      // 猎物：多半明显更小，少数接近可吃上限
-      len = p.len * (Math.random() < 0.72 ? rand(0.32, 0.72) : rand(0.7, lv.eatRatio + 0.02))
+      // 猎物：困难模式小鱼更少、整体更大（smallShare/smallMin 按难度区分）
+      len = p.len * (Math.random() < lv.smallShare ? rand(lv.smallMin, 0.75) : rand(0.7, lv.eatRatio + 0.02))
     }
     len = Math.max(24, Math.min(len, 170))
     w.fishes.push(makeFish(len, { threat: len > p.len * lv.dangerRatio, speedMul: lv.speed }))
@@ -303,7 +305,7 @@ export default function FishFeast() {
         w.spawnT -= dt
         if (w.spawnT <= 0 && w.fishes.length < lv.pop + 4) {
           spawnOne()
-          w.spawnT = rand(0.35, 1.0)
+          w.spawnT = rand(0.6, 1.4)
         }
 
         // 吞咬判定
@@ -322,7 +324,7 @@ export default function FishFeast() {
             w.combo = Math.min(w.combo + 1, 5)
             w.comboT = 2.5
             w.score += Math.round(f.len * (1 + w.combo * 0.2))
-            p.len = Math.min(LEN_MAX, p.len + f.len * 0.1)
+            p.len = Math.min(LEN_MAX, p.len + f.len * 0.07)
             p.gulpT = 0.18
             const st = stageOf(p.len)
             if (st > w.lastStage && st > 0) {
@@ -332,7 +334,7 @@ export default function FishFeast() {
             w.lastStage = st
             if (p.len >= STAGES[3].len) {
               w.apexEaten++
-              if (w.apexEaten >= 8) { finish('win') }
+              if (w.apexEaten >= 10) { finish('win') }
             }
             if (soundRef.current) sfx.gulp(Math.round(f.len / 20))
             const sk = SKEL_SRC[f.color] ?? SKEL_SRC[f.color.split('_')[0]]
@@ -601,7 +603,7 @@ export default function FishFeast() {
               <p className="gk-overlay-title">大鱼吃小鱼 · 深海食记</p>
               <p className="gk-overlay-sub">
                 吃掉比你小的鱼会慢慢长大，体型够大才能咬动更大的猎物。<br />
-                带红圈的鱼比你大——被咬到会掉一颗生命。升到「深海霸主」再吃 8 条即制霸。
+                带红圈的鱼比你大——被咬到会掉一颗生命。升到「深海霸主」再吃 10 条即制霸。
               </p>
               <div className="gk-overlay-actions">
                 <button type="button" className="gm-btn-start" onClick={start}>入水觅食</button>

@@ -6,9 +6,10 @@ const SECTIONS = [
     title: '常用玩具',
     desc: '点击卡片进入对应的小工具',
     toys: [
-      { path: '/games', name: '小游戏街机', desc: '扫雷、贪吃蛇、五子棋 AI、大鱼吃小鱼、剑客对决……十一台经典机器', icon: '🎮', color: '#34d399' },
+      { path: '/games', name: '小游戏街机', desc: '扫雷、贪吃蛇、五子棋 AI、大鱼吃小鱼、霓虹方块……十二台经典机器', icon: '🎮', color: '#34d399' },
       { path: '/codec', name: '编解码工作台', desc: 'Base64、哈希、AES、SM4、与佛论禅……55 种方案随你折腾', icon: '⌨️', color: '#667eea' },
       { path: '/news', name: '今日资讯站', desc: '每天 60 秒读懂世界 + 微博知乎抖音头条热榜 + Epic 喜加一', icon: '📰', color: '#93c5fd' },
+      { path: '/clock', name: '趣味时钟', desc: '月相机械表盘、秒表计次、霓虹圆环倒计时，三态一键切换', icon: '🕰️', color: '#fbbf24' },
       { path: '/qq-avatar', name: 'QQ头像获取', desc: '输入QQ号获取高清头像', icon: '🐧', color: '#12B7F5' },
     ],
   },

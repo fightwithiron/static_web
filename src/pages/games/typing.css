@@ -267,3 +267,61 @@
     font-size: 17px;
   }
 }
+
+
+/* ---------- 自定义文本编辑器 ---------- */
+
+.tp-editor {
+  border: 1px solid rgba(125, 211, 252, 0.22);
+  border-radius: 12px;
+  background: rgba(125, 211, 252, 0.05);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tp-editor-tip {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.tp-editor-input {
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(8, 10, 16, 0.55);
+  color: var(--text-primary, #e2e8f0);
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.8;
+  font-family: inherit;
+  outline: none;
+}
+
+.tp-editor-input:focus {
+  border-color: rgba(125, 211, 252, 0.55);
+  box-shadow: 0 0 0 2px rgba(125, 211, 252, 0.12);
+}
+
+.tp-editor-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tp-editor-count {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.tp-editor-foot .gm-btn-start:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
